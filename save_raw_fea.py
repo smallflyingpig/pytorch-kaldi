@@ -11,6 +11,7 @@
 
 
 import scipy.io.wavfile
+import soundfile as sf 
 import math
 import numpy as np
 import os
@@ -73,7 +74,7 @@ sig_lst = [x.strip() for x in sig_lst]
 for sig_file in sig_lst:
     sig_id=sig_file.split(' ')[0]
     sig_path=sig_file.split(' ')[1]
-    [fs,signal]=scipy.io.wavfile.read(sig_path)
+    [fs,signal]=sf.read(sig_path)
     signal=signal.astype(float)/32768
     signal=signal/np.max(np.abs(signal))
     
