@@ -26,6 +26,12 @@ from distutils.util import strtobool
 import importlib
 import math
 import multiprocessing
+import argparse
+
+
+parser = argparse.ArgumentParser("run exp")
+parser.add_argument("--cfg", type=str, required=True, help="")
+args = parser.parse_args()
 
 def _run_forwarding_in_subprocesses(config):
     use_cuda=strtobool(config['exp']['use_cuda'])
@@ -51,7 +57,7 @@ def _max_nr_of_parallel_forwarding_processes(config):
     return -1
 
 # Reading global cfg file (first argument-mandatory file) 
-cfg_file=sys.argv[1]
+cfg_file=args.cfg
 if not(os.path.exists(cfg_file)):
      sys.stderr.write('ERROR: The config file %s does not exist!\n'%(cfg_file))
      sys.exit(0)
