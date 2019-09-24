@@ -16,15 +16,28 @@ import math
 import numpy as np
 import os
 from data_io import read_vec_int_ark,write_mat
+import argparse
 
 
 # Run it for all the data chunks (e.g., train, dev, test) => uncomment
+parser = argparse.ArgumentParser("save raw feature")
+parser.add_argument("--lab_folder", type=str, default='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/exp/dnn4_pretrain-dbn_dnn_ali_test',
+    help="path for label, typically kaldi/egs/timit/s5/exp/dnn4_pretrain-dbn_dnn_ali_test")
+parser.add_argument("--lab_opts", type=str, default='ali-to-pdf',
+    help="default ali-to-pdf")
+parser.add_argument("--out_folder", type=str, default='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/raw_TIMIT_200ms/test',
+    help="path for output folder, typically kaldi/egs/timit/s5/data/raw_TIMIT_200ms/test'")
+parser.add_argument("--wav_lst", type=str, default='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/test/wav.lst',
+    help="path for wav list, typically kaldi/egs/timit/s5/data/test/wav.scp")
+parser.add_argument("--scp_file_out", type=str, default='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/raw_TIMIT_200ms/test/feats_raw.scp',
+    help="path for scp file out, typically kaldi/egs/timit/s5/data/raw_TIMIT_200ms/test/feats_raw.scp")
+args = parser.parse_args()
 
-lab_folder='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/exp/dnn4_pretrain-dbn_dnn_ali_test'
-lab_opts='ali-to-pdf'
-out_folder='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/raw_TIMIT_200ms/test'
-wav_lst='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/test/wav.lst'
-scp_file_out='/users/parcollet/KALDI/kaldi-trunk/egs/timit/s5/data/raw_TIMIT_200ms/test/feats_raw.scp'
+lab_folder=args.lab_folder
+lab_opts=args.lab_opts
+out_folder=args.out_folder
+wav_lst=args.wav_lst
+scp_file_out=args.scp_file_out
 
 #lab_folder='quick_test/dnn4_pretrain-dbn_dnn_ali_dev'
 #lab_opts='ali-to-pdf'
